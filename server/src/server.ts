@@ -6,11 +6,13 @@ import mongoose from "mongoose";
 import getUserFromJwt from "./services/user/getUserFromJwt";
 import login from "./services/user/login";
 require("dotenv").config();
+const cors = require('cors');
 
 const app = express();
 const port = 3001;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.post("/create_user", createUser);
 app.post("/login", login);
