@@ -5,23 +5,23 @@ import { setCookie, unsetCookie } from "@/utils/cookies";
 const Login = () => {
     const router = useRouter()
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
     const handleLogin = async () => {
         setError(null);
-        if (username.length == 0 || password.length == 0){
+        if (email.length == 0 || password.length == 0){
             setError('Please fill out all the fields!')
             return
         }
-        const response = await fetch("http://localhost:8000/login", {
+        const response = await fetch("http://localhost:3001/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Headers": "*",
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ email, password }),
         });
         const result = await response.json();
         console.log(result)
@@ -73,12 +73,12 @@ const Login = () => {
                                 Login 📚
                             </h1>
                             <input
-                                type="text"
-                                placeholder="Username"
+                                type="email"
+                                placeholder="Email"
                                 className="input input-bordered  w-2/3 mb-8  rounded-full"
-                                value={username}
+                                value={email}
                                 onChange={(e) => {
-                                    setUsername(e.target.value);
+                                    setEmail(e.target.value);
                                 }}
                             />
                             <input
