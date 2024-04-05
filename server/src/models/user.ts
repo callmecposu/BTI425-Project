@@ -12,7 +12,8 @@ interface User extends Document {
     name: string,
     password: string,
     wishlist: string[],
-    purchased_courses: string[]
+    purchased_courses: string[],
+    is_author: boolean
 }
 
 const userSchema: Schema = new Schema({
@@ -35,6 +36,10 @@ const userSchema: Schema = new Schema({
     purchased_courses: {
         type: [String],
         default: []
+    },
+    is_author: {
+        type: Boolean,
+        default: false
     }
 })
 
