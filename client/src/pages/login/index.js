@@ -41,10 +41,10 @@ const Login = () => {
         }
         setCookie(
             "jwt",
-            response.headers.get("token"),
+            result.token,
             60 * 60 * 24 * 3
         );
-        router.push('/dashboard')
+        router.push('/home')
     };
 
     return (

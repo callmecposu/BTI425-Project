@@ -6,6 +6,7 @@ import { setCookie, unsetCookie } from "@/utils/cookies";
 const Signup = () => {
     const router = useRouter()
 
+    const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -14,7 +15,7 @@ const Signup = () => {
     const handleSignUp = async () => {
         setError(null)
 
-        if (username.length == 0 || password.length == 0 || confirmPassword.length == 0) {
+        if (username.length == 0 || password.length == 0 || confirmPassword.length == 0 || email.length == 0) {
             setError('Please fill out all the fields!')
             return
         }
@@ -22,14 +23,18 @@ const Signup = () => {
             setError("Password do not match!")
             return
         }
+        if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+            setError('Invalid email address');
+            return;
+        }
 
-        const response = await fetch("http://localhost:3001/user", {
+        const response = await fetch("http://localhost:3001/create_user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Headers": "*",
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ email: email, name: username, password: password }),
         });
         const result = await response.json();
         console.log(result)
@@ -49,10 +54,10 @@ const Signup = () => {
         }
         setCookie(
             "jwt",
-            response.headers.get("token"),
+            result.token,
             60 * 60 * 24 * 3
         );
-        router.push('/dashboard')
+        router.push('/home')
 
     }
 
@@ -91,8 +96,9 @@ const Signup = () => {
 
                         <div className=" flex justify-center  items-center flex-col flex-wrap  w-full">
                             <h1 className=" font-bold text-3xl text-center mb-8 ">Sign Up 🎓</h1>
+                            <input type="email" placeholder="Email" className="input input-bordered  w-2/3 mb-8  rounded-full " onChange={(e) => { setEmail(e.target.value) }} value={email} />
 
-                            <input type="text" placeholder="Username" className="input input-bordered  w-2/3 mb-8  rounded-full " onChange={(e) => { setUsername(e.target.value) }} value={username} />
+                            <input type="text" placeholder="Name" className="input input-bordered  w-2/3 mb-8  rounded-full " onChange={(e) => { setUsername(e.target.value) }} value={username} />
 
                             <input type="password" placeholder="Password" className="input input-bordered  w-2/3 mb-8 rounded-full" onChange={(e) => { setPassword(e.target.value) }} value={password} />
 
