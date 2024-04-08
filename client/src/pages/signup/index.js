@@ -57,12 +57,12 @@ const Signup = () => {
             result.token,
             60 * 60 * 24 * 3
         );
-        router.push('/home')
+        router.push('/')
 
     }
 
     return (
-        <div className="flex justify-center h-screen place-items-center bg-white">
+        <div className="flex justify-center h-screen place-items-center">
             <div className="relative">
                 <button className="absolute top-4 right-4 z-10" onClick={() => { router.push("/") }}>
                     <svg
