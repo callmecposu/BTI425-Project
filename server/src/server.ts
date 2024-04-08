@@ -10,6 +10,7 @@ import withUser from "./middleware/withUser";
 import createCourse from "./services/course/createCourse";
 import updateCourse from "./services/course/updateCourse";
 import getCourse from "./services/course/getCourse";
+import createLecture from "./services/lecture/createLecture";
 require("dotenv").config();
 const cors = require("cors");
 
@@ -34,6 +35,8 @@ app.get("/get_user_from_jwt", withUser, getUserFromJwt);
 app.get("/course/:id", getCourse);
 app.post("/create_course", withUser, createCourse);
 app.post("/update_course/:id", withUser, updateCourse);
+
+app.post("/create_lecture", withUser, createLecture);
 
 mongoose.connect(process.env.MONGODB as string).then(() => {
     console.log("Connected to DB!");
