@@ -9,7 +9,7 @@ import mongoose, {Schema, Document, StringExpression} from "mongoose";
 // - author_id
 // - lectures: [id]
 
-interface Course extends Document {
+export interface Course extends Document {
     title: string,
     description: string,
     price: number,
