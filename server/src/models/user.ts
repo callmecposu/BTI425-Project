@@ -7,7 +7,7 @@ import mongoose, {Schema, Document} from "mongoose";
 // - wishlist
 // - purchased_courses
 
-interface User extends Document {
+export interface User extends Document {
     email: string,
     name: string,
     password: string,
