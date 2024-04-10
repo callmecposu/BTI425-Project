@@ -11,12 +11,16 @@ const getCourse = async (req: Request, res: Response) => {
     for (let i = 0; i < (course?.lectures.length as number); i++) {
         const lec = await LectureModel.findOne({ _id: course?.lectures[i] });
         // remove the content property if user has not purchased this course
+        // AND they are not the author
         let lecture: any = {};
-        if (!req.user?.purchased_courses.includes(req.params.id)){
-            lecture._id = lec?._id
-            lecture.title = lec?.title
+        if (
+            !req.user?.purchased_courses.includes(req.params.id) &&
+            req.user?._id != course?.author_id
+        ) {
+            lecture._id = lec?._id;
+            lecture.title = lec?.title;
         } else {
-            lecture = lec
+            lecture = lec;
         }
         lectures.push(lecture);
     }
