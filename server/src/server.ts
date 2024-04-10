@@ -11,6 +11,8 @@ import createCourse from "./services/course/createCourse";
 import updateCourse from "./services/course/updateCourse";
 import getCourse from "./services/course/getCourse";
 import createLecture from "./services/lecture/createLecture";
+import updateLecture from "./services/lecture/updateLecture";
+import deleteLecture from "./services/lecture/deleteLecture";
 require("dotenv").config();
 const cors = require("cors");
 
@@ -37,6 +39,8 @@ app.post("/create_course", withUser, createCourse);
 app.post("/update_course/:id", withUser, updateCourse);
 
 app.post("/create_lecture", withUser, createLecture);
+app.post('/update_lecture/:id', withUser, updateLecture)
+app.delete('/delete_lecture/:id', withUser, deleteLecture)
 
 mongoose.connect(process.env.MONGODB as string).then(() => {
     console.log("Connected to DB!");
