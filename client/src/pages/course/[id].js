@@ -7,15 +7,16 @@ export default function CoursePage() {
     const router = useRouter()
     const { id } = router.query
     const [course, setCourse] = useState(null)
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
         if (!router.isReady) return;
         
         const jwtCookie = document.cookie
-            .split(';')
-            .find(cookie => cookie.trim().startsWith('jwt='));
+            ?.split(';')
+            ?.find(cookie => cookie.trim().startsWith('jwt='));
 
-        const jwtValue = jwtCookie.split('=')[1];
+        const jwtValue = jwtCookie?.split('=')[1];
 
         fetch(`http://localhost:3001/course/${id}`, {
             headers: {
@@ -23,11 +24,64 @@ export default function CoursePage() {
                 'Authorization': 'Bearer ' + jwtValue,
             }
         })
-            .then(res => res.json())
-            .then(data => {
-                setCourse(data)
+        .then(res => res.json())
+        .then(data => {
+            setCourse(data)
+        })
+
+        if(jwtValue) {
+            fetch('http://localhost:3001/get_user_from_jwt', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + jwtValue,
+                }
+            }).then(res => res.json()).then(data => {
+                setUser(data);
             })
+        }
     }, [router.isReady])
+
+    const addToWishlist = () => {
+        const jwtCookie = document.cookie
+            .split(';')
+            .find(cookie => cookie.trim().startsWith('jwt='));
+
+        const jwtValue = jwtCookie.split('=')[1];
+
+        fetch(`http://localhost:3001/add_to_wishlist`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + jwtValue,
+            },
+            body: JSON.stringify({course_id: id})
+        })
+        .then(res => res.json())
+        .then(data => {
+            setUser(data)
+        })
+    }
+
+    const removeFromWishlist = () => {
+        const jwtCookie = document.cookie
+            .split(';')
+            .find(cookie => cookie.trim().startsWith('jwt='));
+
+        const jwtValue = jwtCookie.split('=')[1];
+
+        fetch(`http://localhost:3001/remove_from_wishlist`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + jwtValue,
+            },
+            body: JSON.stringify({course_id: id})
+        })
+        .then(res => res.json())
+        .then(data => {
+            setUser(data)
+        })
+    }
 
     return (
         <>
@@ -38,8 +92,19 @@ export default function CoursePage() {
                     <div className='p-2'>
                         <div className='text-lg' style={{fontWeight: 'medium'}}>{course?.course?.title}</div>
                         <div className='text-xl' style={{fontWeight: 'bold'}}>${course?.course?.price}</div>
-                        <div className='rounded-full bg-emerald-700 text-white mt-2 py-1 text-center'>Buy Now</div>
-                        <div className='rounded-full text-emerald-700 border-2 border-emerald-700 mt-2 py-1 text-center'>Add to Wishlist</div>
+                        <div 
+                            className='rounded-full bg-emerald-700 text-white mt-2 py-1 text-center cursor-pointer'
+                        >
+                            Buy Now
+                        </div>
+                        <div 
+                            className='rounded-full text-emerald-700 border-2 border-emerald-700 mt-2 py-1 text-center cursor-pointer'
+                            onClick={() => user?.wishlist?.includes(id) ? removeFromWishlist() : addToWishlist()}
+                        >
+                            {
+                                user?.wishlist?.includes(id) ? 'Remove from Wishlist' : 'Add to Wishlist'
+                            }
+                        </div>
                     </div>
                 </div>
                 <div>
