@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout/layout'
 import { useState, useEffect } from 'react'
+import { getUserFromJWT } from '@/utils/cookies'
 
 export default function CoursePage() {
     const router = useRouter()
@@ -29,16 +30,9 @@ export default function CoursePage() {
             setCourse(data)
         })
 
-        if(jwtValue) {
-            fetch('http://localhost:3001/get_user_from_jwt', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + jwtValue,
-                }
-            }).then(res => res.json()).then(data => {
-                setUser(data);
-            })
-        }
+        getUserFromJWT().then(data => {
+            setUser(data);
+        })
     }, [router.isReady])
 
     const addToWishlist = () => {

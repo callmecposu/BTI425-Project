@@ -18,7 +18,8 @@ export default function Home() {
   return (
     <div>
       <Layout />
-      <div className="grid gap-4 container m-auto mt-7 flex-wrap m-4" style={{gridTemplateColumns: 'repeat(auto-fill,minmax(15rem,1fr))', rowGap: '2rem', columnGap: '2rem'}}>
+      <div className='text-3xl font-semibold container m-auto pt-8'>Explore Popular Courses</div>
+      <div className="grid gap-4 container m-auto mt-7 flex-wrap m-4" style={{gridTemplateColumns: 'repeat(auto-fill,minmax(15rem,1fr))', rowGap: '2rem', columnGap: '2rem'}}> 
         {courses.map(course => (
           <Card course={course} key={course._id} />
         ))}
