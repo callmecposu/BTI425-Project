@@ -83,7 +83,7 @@ export default function CoursePage() {
     return (
         <>
             <Layout />
-            <div className='container m-auto p-4 mt-10 pt-2 flex'>
+            <div className='container m-auto p-4 mt-10 pt-2 flex mt-4'>
                 <div className='w-64 rounded-2xl shadow-lg mr-8 pb-3 h-full'>
                     <img src='/CH1245.webp' className='rounded-t-2xl' />
                     <div className='p-2'>
@@ -91,12 +91,13 @@ export default function CoursePage() {
                         <div className='text-xl' style={{fontWeight: 'bold'}}>${course?.course?.price}</div>
                         <div 
                             className='rounded-full bg-emerald-700 text-white mt-2 py-1 text-center cursor-pointer'
+                            onClick={() => user ? router.push('/buy/'+id) : router.push('/login')}
                         >
                             Buy Now
                         </div>
                         <div 
                             className='rounded-full text-emerald-700 border-2 border-emerald-700 mt-2 py-1 text-center cursor-pointer'
-                            onClick={() => user?.wishlist?.includes(id) ? removeFromWishlist() : addToWishlist()}
+                            onClick={() => user ? (user?.wishlist?.includes(id) ? removeFromWishlist() : addToWishlist()) : router.push('/login')}
                         >
                             {
                                 user?.wishlist?.includes(id) ? 'Remove from Wishlist' : 'Add to Wishlist'

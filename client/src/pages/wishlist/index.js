@@ -12,6 +12,9 @@ export default function Wishlist() {
 
     useEffect(() => {
         getUserFromJWT().then(data => {
+            if (!data) {
+                router.push('/login')
+            }
             setIsLoggedIn(true);
             setUser(data);
         })
