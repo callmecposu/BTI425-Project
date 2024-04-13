@@ -10,3 +10,23 @@ export const setCookie = (
 export const unsetCookie = (cookieName, path = "/") => {
     document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=${path}`;
 };
+
+export const getUserFromJWT = async () => {
+    const jwtCookie = document.cookie
+    .split(';')
+    .find(cookie => cookie.trim().startsWith('jwt='));
+
+    if (jwtCookie) {
+        const jwtValue = jwtCookie.split('=')[1];
+        let json = await fetch('http://localhost:3001/get_user_from_jwt', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + jwtValue,
+            }
+        })
+        let data = await json.json()
+        return data
+    } else {
+        console.log('JWT cookie not found');
+    }
+}
