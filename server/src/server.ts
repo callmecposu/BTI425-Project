@@ -42,7 +42,7 @@ app.post('/remove_from_wishlist', withUser, removeFromWishlist)
 app.get('/purchase_course/:course_id', withUser, purchaseCourse)
 
 app.get('/courses', getCourses)
-app.get("/course/:id", withUser, getCourse);
+app.get("/course/:id", getCourse);
 app.post("/create_course", withUser, createCourse);
 app.post("/update_course/:id", withUser, updateCourse);
 
