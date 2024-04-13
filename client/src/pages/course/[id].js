@@ -18,12 +18,15 @@ export default function CoursePage() {
             ?.find(cookie => cookie.trim().startsWith('jwt='));
 
         const jwtValue = jwtCookie?.split('=')[1];
+        let headers = {
+            'Content-Type': 'application/json',
+        }
+        if(jwtValue) {
+            headers['Authorization'] = 'Bearer ' + jwtValue;
+        }
 
         fetch(`http://localhost:3001/course/${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + jwtValue,
-            }
+            headers: headers
         })
         .then(res => res.json())
         .then(data => {
@@ -81,7 +84,7 @@ export default function CoursePage() {
         <>
             <Layout />
             <div className='container m-auto p-4 mt-10 pt-2 flex'>
-                <div className='w-64 rounded-2xl shadow-lg mr-8 pb-3'>
+                <div className='w-64 rounded-2xl shadow-lg mr-8 pb-3 h-full'>
                     <img src='/CH1245.webp' className='rounded-t-2xl' />
                     <div className='p-2'>
                         <div className='text-lg' style={{fontWeight: 'medium'}}>{course?.course?.title}</div>
@@ -102,7 +105,9 @@ export default function CoursePage() {
                     </div>
                 </div>
                 <div>
+                    <div className='text-md my-2' style={{fontWeight: '500'}}>Description</div>
                     <div>{course?.course?.description}</div>
+                    <div className='text-md my-2 mt-4' style={{fontWeight: '500'}}>Learning Outcomes</div>
                     <div className='flex gap-12 pl-6 mt-4 mb-4'>
                         <ul className='list-disc'>
                             {
@@ -125,6 +130,7 @@ export default function CoursePage() {
                             }
                         </ul>
                     </div>
+                    <div className='text-md my-2 mt-4' style={{fontWeight: '500'}}>Materials</div>
                     <div className='border-2 rounded-xl p-4 border-zinc-200 mb-4 flex flex-col gap-2'>
                             {
                                 course?.lectures?.length > 0 ?

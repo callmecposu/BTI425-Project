@@ -23,12 +23,15 @@ export default function Wishlist() {
             ?.find(cookie => cookie.trim().startsWith('jwt='));
 
         const jwtValue = jwtCookie?.split('=')[1];
+        let headers = {
+            'Content-Type': 'application/json',
+        }
+        if(jwtValue) {
+            headers['Authorization'] = 'Bearer ' + jwtValue;
+        }
 
         const json = await fetch(`http://localhost:3001/course/${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + jwtValue,
-            }
+            headers: headers
         })
         const data = await json.json()
         return data
