@@ -89,20 +89,31 @@ export default function CoursePage() {
                     <div className='p-2'>
                         <div className='text-lg' style={{fontWeight: 'medium'}}>{course?.course?.title}</div>
                         <div className='text-xl' style={{fontWeight: 'bold'}}>${course?.course?.price}</div>
-                        <div 
-                            className='rounded-full bg-emerald-700 text-white mt-2 py-1 text-center cursor-pointer'
-                            onClick={() => user ? router.push('/buy/'+id) : router.push('/login')}
-                        >
-                            Buy Now
-                        </div>
-                        <div 
-                            className='rounded-full text-emerald-700 border-2 border-emerald-700 mt-2 py-1 text-center cursor-pointer'
-                            onClick={() => user ? (user?.wishlist?.includes(id) ? removeFromWishlist() : addToWishlist()) : router.push('/login')}
-                        >
-                            {
-                                user?.wishlist?.includes(id) ? 'Remove from Wishlist' : 'Add to Wishlist'
-                            }
-                        </div>
+                        {
+                            user?.purchased_courses?.includes(id) ?
+                            <div 
+                                className='w-full bg-emerald-700 text-white text-center py-2 mt-3 rounded-full cursor-pointer hover:bg-emerald-800 transition duration-300 ease-in-out'
+                                onClick={() => router.push('/learn/'+id)}
+                            >
+                                Continue Learning
+                            </div> :
+                            <>
+                                <div 
+                                    className='rounded-full bg-emerald-700 text-white mt-2 py-1 text-center cursor-pointer'
+                                    onClick={() => user ? router.push('/buy/'+id) : router.push('/login')}
+                                >
+                                    Buy Now
+                                </div>
+                                <div 
+                                    className='rounded-full text-emerald-700 border-2 border-emerald-700 mt-2 py-1 text-center cursor-pointer'
+                                    onClick={() => user ? (user?.wishlist?.includes(id) ? removeFromWishlist() : addToWishlist()) : router.push('/login')}
+                                >
+                                    {
+                                        user?.wishlist?.includes(id) ? 'Remove from Wishlist' : 'Add to Wishlist'
+                                    }
+                                </div>
+                            </>
+                        }
                     </div>
                 </div>
                 <div>
