@@ -6,15 +6,25 @@
 ```
 cd server && npm i
 ```
-4.  Run server
-```
-npm run dev
-```
-5.  Install dependencies on the client
+4.  Install dependencies on the client
 ```
 cd client && npm i
 ```
-6.  Run client
+
+# Running locally
+
+1.  Run server
 ```
-npm run dev
+cd server && npm run dev
+```
+
+2.  Run client
+```
+cd client && npm run dev
+```
+
+# Running Unit Tests
+
+```
+cd server && npm run test
 ```
