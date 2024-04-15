@@ -30,7 +30,10 @@ export default function Layout() {
                         <a href='/my-learning' className='text-md text-light'>My Learning</a>
                     </div>
                 </div>
-                <div>
+                <div className='flex items-center'>
+                    <div onClick={() => {router.push('/history')}} className='mr-4 text-emerald-700 text-2xl cursor-pointer mt-1'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9a9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5m4-1v5l4 2"/></g></svg>
+                    </div>
                     {
                         user?.name ? 
                         <div className='flex gap-4 items-center'>

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Layout from '@/components/layout/layout'
 import { useState, useEffect } from 'react'
 import { getUserFromJWT } from '@/utils/cookies'
+import { addToSearchHistory } from '@/utils/searchHistory'
 
 export default function CoursePage() {
     const router = useRouter()
@@ -30,6 +31,7 @@ export default function CoursePage() {
         })
         .then(res => res.json())
         .then(data => {
+            addToSearchHistory(data)
             setCourse(data)
         })
 
