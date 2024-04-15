@@ -24,7 +24,7 @@ const getCourse = async (req: Request, res: Response) => {
         let lecture: any = {};
         if (
             !user || (!user?.purchased_courses.includes(req.params.id) &&
-            req.user?._id != course?.author_id)
+            user?._id != course?.author_id)
         ) {
             lecture._id = lec?._id;
             lecture.title = lec?.title;

@@ -27,7 +27,6 @@ declare global {
         }
     }
 }
-
 const app = express();
 const port = 3001;
 
@@ -37,22 +36,25 @@ app.use(cors());
 app.post("/create_user", createUser);
 app.post("/login", login);
 app.get("/get_user_from_jwt", withUser, getUserFromJwt);
-app.post("/add_to_wishlist", withUser, addToWishlist)
-app.post('/remove_from_wishlist', withUser, removeFromWishlist)
-app.get('/purchase_course/:course_id', withUser, purchaseCourse)
+app.post("/add_to_wishlist", withUser, addToWishlist);
+app.post("/remove_from_wishlist", withUser, removeFromWishlist);
+app.get("/purchase_course/:course_id", withUser, purchaseCourse);
 
-app.get('/courses', getCourses)
+app.get("/courses", getCourses);
 app.get("/course/:id", getCourse);
 app.post("/create_course", withUser, createCourse);
 app.post("/update_course/:id", withUser, updateCourse);
 
 app.post("/create_lecture", withUser, createLecture);
-app.post('/update_lecture/:id', withUser, updateLecture)
-app.delete('/delete_lecture/:id', withUser, deleteLecture)
+app.post("/update_lecture/:id", withUser, updateLecture);
+app.delete("/delete_lecture/:id", withUser, deleteLecture);
 
-mongoose.connect(process.env.MONGODB as string).then(() => {
-    console.log("Connected to DB!");
-    app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${port}`);
-    });
-});
+// app.listen(port, () => {
+//     console.log(`Server is running on http://localhost:${port}`);
+//     mongoose.connect(process.env.MONGODB as string).then(() => {
+//         console.log("Connected to DB!");
+//     });
+// });
+
+export default app;
+
