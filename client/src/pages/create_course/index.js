@@ -92,19 +92,20 @@ export default function Home() {
         delete submitData.learningOutcomes;
         submitData.price = price;
 
-        console.log(courseData);
         const jwt = document.cookie.split(';').find(cookie => cookie.includes('jwt'))
 
         fetch('http://localhost:3001/create_course', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${jwt.split('=')[1]}`
+                'Authorization': `Bearer ${jwt.split('=')[1]}`,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(submitData)
         })
         .then(response => response.json())
         .then(data => {
             console.log('course', data)
+            router.push('/edit_course/'+data._id)
         })
     };
 

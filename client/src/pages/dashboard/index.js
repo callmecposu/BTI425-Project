@@ -13,16 +13,16 @@ export default function Home() {
     useEffect(() => {
         if (!router.isReady) return
 
-        const user = getUserFromJWT().then((data) => {
-            setUser(data)
-            if (!data?._id) {
+        const user = getUserFromJWT().then((userData) => {
+            setUser(userData)
+            if (!userData?._id) {
                 router.push('/login')
             }
     
             fetch(`http://localhost:3001/courses?q=`)
             .then(res => res.json())
             .then(data => {
-                setCourses(data.filter((item) => item.author_id == user._id))
+                setCourses(data.filter((item) => item.author_id == userData._id))
             })
         })
     }, [router.isReady])
@@ -40,7 +40,7 @@ export default function Home() {
                 {
                     courses.length > 0 ? 
                     courses.map(course => (
-                    <Card course={course} key={course._id} />
+                    <Card course={course} key={course._id} dashboard={true} />
                     )) :
                     <div className="text-xl font-normal w-full">You didn't create any course yet</div>
                 }

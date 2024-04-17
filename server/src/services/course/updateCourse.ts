@@ -22,6 +22,9 @@ const updateCourse = async (req: Request, res: Response) => {
     if (req.body.learning_outcomes) {
         update.learning_outcomes = req.body.learning_outcomes;
     }
+    if (req.body.price) {
+        update.price = req.body.price;
+    }
     // update the course
     let updatedCourse = await CourseModel.findOneAndUpdate(
         { _id: req.params.id },
