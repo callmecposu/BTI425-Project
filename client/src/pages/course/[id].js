@@ -86,7 +86,7 @@ export default function CoursePage() {
         <>
             <Layout />
             <div className='container m-auto p-4 mt-10 pt-2 flex mt-4'>
-                <div className='w-64 rounded-2xl shadow-lg mr-8 pb-3 h-full'>
+                <div className='w-64 min-w-64 rounded-2xl shadow-lg mr-8 pb-3 h-full'>
                     <img src='/CH1245.webp' className='rounded-t-2xl' />
                     <div className='p-2'>
                         <div className='text-lg' style={{fontWeight: 'medium'}}>{course?.course?.title}</div>

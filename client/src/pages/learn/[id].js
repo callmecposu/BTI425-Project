@@ -56,8 +56,8 @@ export default function Learning() {
                             if(lecture._id == currentLecture) {
                                 return (
                                     <div key={lecture._id}>
-                                        <h1 className='text-xl mb-4'>{lecture.title}</h1>
-                                        <div>
+                                        <h1 className='text-xl mb-4 font-semibold'>{lecture.title}</h1>
+                                        <div style={{whiteSpace: 'pre-wrap'}}>
                                             {
                                                 lecture?.content
                                             }
