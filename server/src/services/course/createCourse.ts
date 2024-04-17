@@ -5,6 +5,7 @@ import CourseModel from "../../models/course";
 const createCourse = async (req: Request, res: Response) => {
     console.log('author: ', req.user)
     // create the course
+    console.log('req.body: ', req.body)
     const newCourse = new CourseModel({
         title: req.body.title,
         description: req.body.description,

@@ -26,6 +26,7 @@ export default function Layout() {
                         Learnify
                     </a>
                     <div>
+                        <a href='/dashboard' className='text-md text-white bg-emerald-700 rounded-md p-2 mr-4'>Author's Dashboard</a>
                         <a href='/' className='text-md text-light mr-4'>Explore Courses</a>
                         <a href='/my-learning' className='text-md text-light'>My Learning</a>
                     </div>
