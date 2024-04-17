@@ -28,7 +28,7 @@ const Signup = () => {
             return;
         }
 
-        const response = await fetch("http://localhost:3001/create_user", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}:3001/create_user`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

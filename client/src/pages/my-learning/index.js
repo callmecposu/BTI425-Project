@@ -33,7 +33,7 @@ export default function MyLearning() {
             headers['Authorization'] = 'Bearer ' + jwtValue;
         }
 
-        const json = await fetch(`http://localhost:3001/course/${id}`, {
+        const json = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/course/${id}`, {
             headers: headers
         })
         const data = await json.json()

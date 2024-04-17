@@ -19,7 +19,7 @@ export default function Home() {
                 router.push('/login')
             }
     
-            fetch(`http://localhost:3001/courses?q=`)
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses?q=`)
             .then(res => res.json())
             .then(data => {
                 setCourses(data.filter((item) => item.author_id == userData._id))

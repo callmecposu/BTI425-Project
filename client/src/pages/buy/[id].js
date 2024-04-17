@@ -35,7 +35,7 @@ export default function CoursePage() {
             router.push('/login')
         }
 
-        fetch(`http://localhost:3001/course/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/course/${id}`, {
             headers: headers
         })
         .then(res => res.json())
@@ -86,7 +86,7 @@ export default function CoursePage() {
 
         const jwtValue = jwtCookie.split('=')[1];
 
-        fetch(`http://localhost:3001/purchase_course/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/purchase_course/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

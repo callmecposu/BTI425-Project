@@ -11,7 +11,7 @@ export default function Card({course, wishlist=false, purchased=false, dashboard
 
         const jwtValue = jwtCookie.split('=')[1];
 
-        fetch(`http://localhost:3001/remove_from_wishlist`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/remove_from_wishlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

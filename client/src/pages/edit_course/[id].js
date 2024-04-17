@@ -48,7 +48,7 @@ export default function Home() {
             headers['Authorization'] = 'Bearer ' + jwtValue;
         }
         
-        fetch(`http://localhost:3001/course/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/course/${id}`, {
             headers: headers
         })
         .then(res => res.json())
@@ -136,7 +136,7 @@ export default function Home() {
         const jwt = document.cookie.split(';').find(cookie => cookie.includes('jwt'))
 
         console.log('submitData', submitData)   
-        fetch('http://localhost:3001/update_course/'+id, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/update_course/`+id, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${jwt.split('=')[1]}`,
@@ -165,7 +165,7 @@ export default function Home() {
             ?.split(';')
             ?.find(cookie => cookie.trim().startsWith('jwt='));
         const jwtValue = jwtCookie?.split('=')[1];
-        fetch(mode === 'create' ? `http://localhost:3001/create_lecture` : `http://localhost:3001/update_lecture/${editLectureId}`, {
+        fetch(mode === 'create' ? `${process.env.NEXT_PUBLIC_SERVER_URL}/create_lecture` : `${process.env.NEXT_PUBLIC_SERVER_URL}/update_lecture/${editLectureId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -198,7 +198,7 @@ export default function Home() {
             ?.find(cookie => cookie.trim().startsWith('jwt='));
         const jwtValue = jwtCookie?.split('=')[1];   
 
-        fetch(`http://localhost:3001/delete_lecture/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/delete_lecture/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': 'Bearer ' + jwtValue

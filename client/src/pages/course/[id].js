@@ -26,7 +26,7 @@ export default function CoursePage() {
             headers['Authorization'] = 'Bearer ' + jwtValue;
         }
 
-        fetch(`http://localhost:3001/course/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/course/${id}`, {
             headers: headers
         })
         .then(res => res.json())
@@ -47,7 +47,7 @@ export default function CoursePage() {
 
         const jwtValue = jwtCookie.split('=')[1];
 
-        fetch(`http://localhost:3001/add_to_wishlist`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/add_to_wishlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ export default function CoursePage() {
 
         const jwtValue = jwtCookie.split('=')[1];
 
-        fetch(`http://localhost:3001/remove_from_wishlist`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/remove_from_wishlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

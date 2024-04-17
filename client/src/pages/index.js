@@ -8,7 +8,7 @@ export default function Home() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:3001/courses?q=${search}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses?q=${search}`)
       .then(res => res.json())
       .then(data => {
         setCourses(data)

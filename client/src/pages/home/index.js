@@ -9,7 +9,7 @@ export default function Home() {
     if (!jwt) {
       window.location.href = '/login'
     } else {
-      fetch('http://localhost:3001/get_user_from_jwt', {
+      fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/get_user_from_jwt`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${jwt.split('=')[1]}`

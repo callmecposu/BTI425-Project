@@ -94,7 +94,7 @@ export default function Home() {
 
         const jwt = document.cookie.split(';').find(cookie => cookie.includes('jwt'))
 
-        fetch('http://localhost:3001/create_course', {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/create_course`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${jwt.split('=')[1]}`,

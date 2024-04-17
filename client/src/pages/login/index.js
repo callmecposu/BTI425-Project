@@ -15,7 +15,7 @@ const Login = () => {
             setError('Please fill out all the fields!')
             return
         }
-        const response = await fetch("http://localhost:3001/login", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

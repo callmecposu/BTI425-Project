@@ -18,7 +18,7 @@ export const getUserFromJWT = async () => {
 
     if (jwtCookie) {
         const jwtValue = jwtCookie.split('=')[1];
-        let json = await fetch('http://localhost:3001/get_user_from_jwt', {
+        let json = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/get_user_from_jwt`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + jwtValue,
