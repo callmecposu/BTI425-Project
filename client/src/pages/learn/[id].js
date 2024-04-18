@@ -1,3 +1,13 @@
+/****************************************************************************** 
+ * BTI425 – Project
+ * 
+ * I declare that this assignment is my own work in accordance with SenecaAcademic Policy.
+ * No part of this assignment has been copied manually or electronically from any other source
+ * (including web sites) or distributed to other students.
+ * Group member Name: Vladyslav Huziienko, Maksym Volkovynskyi 
+ * Student IDs: 180749210, 126867225
+ * Date: 18 April 2024
+*****************************************************************************/
 import React, {useState, useEffect} from 'react'
 import { getUserFromJWT } from '@/utils/cookies'
 import { useRouter } from 'next/router'
@@ -36,7 +46,7 @@ export default function Learning() {
             }
         })
 
-        fetch(`http://localhost:3001/course/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/course/${id}`, {
             headers: headers
         })
         .then(res => res.json())
@@ -56,8 +66,8 @@ export default function Learning() {
                             if(lecture._id == currentLecture) {
                                 return (
                                     <div key={lecture._id}>
-                                        <h1 className='text-xl mb-4'>{lecture.title}</h1>
-                                        <div>
+                                        <h1 className='text-xl mb-4 font-semibold'>{lecture.title}</h1>
+                                        <div style={{whiteSpace: 'pre-wrap'}}>
                                             {
                                                 lecture?.content
                                             }

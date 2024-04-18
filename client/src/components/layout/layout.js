@@ -1,3 +1,13 @@
+/****************************************************************************** 
+ * BTI425 – Project
+ * 
+ * I declare that this assignment is my own work in accordance with SenecaAcademic Policy.
+ * No part of this assignment has been copied manually or electronically from any other source
+ * (including web sites) or distributed to other students.
+ * Group member Name: Vladyslav Huziienko, Maksym Volkovynskyi 
+ * Student IDs: 180749210, 126867225
+ * Date: 18 April 2024
+*****************************************************************************/
 import React, {useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import { getUserFromJWT } from '@/utils/cookies'
@@ -26,6 +36,10 @@ export default function Layout() {
                         Learnify
                     </a>
                     <div>
+                        {
+                            user?.name &&
+                            <a href='/dashboard' className='text-md text-white bg-emerald-700 rounded-md p-2 mr-4'>Author's Dashboard</a>
+                        }
                         <a href='/' className='text-md text-light mr-4'>Explore Courses</a>
                         <a href='/my-learning' className='text-md text-light'>My Learning</a>
                     </div>

@@ -1,3 +1,13 @@
+/****************************************************************************** 
+ * BTI425 – Project
+ * 
+ * I declare that this assignment is my own work in accordance with SenecaAcademic Policy.
+ * No part of this assignment has been copied manually or electronically from any other source
+ * (including web sites) or distributed to other students.
+ * Group member Name: Vladyslav Huziienko, Maksym Volkovynskyi 
+ * Student IDs: 180749210, 126867225
+ * Date: 18 April 2024
+*****************************************************************************/
 import React, {useState, useEffect} from 'react'
 import Layout from '@/components/layout/layout'
 import { useRouter } from 'next/router'
@@ -33,7 +43,7 @@ export default function MyLearning() {
             headers['Authorization'] = 'Bearer ' + jwtValue;
         }
 
-        const json = await fetch(`http://localhost:3001/course/${id}`, {
+        const json = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/course/${id}`, {
             headers: headers
         })
         const data = await json.json()

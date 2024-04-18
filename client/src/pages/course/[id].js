@@ -1,3 +1,13 @@
+/****************************************************************************** 
+ * BTI425 – Project
+ * 
+ * I declare that this assignment is my own work in accordance with SenecaAcademic Policy.
+ * No part of this assignment has been copied manually or electronically from any other source
+ * (including web sites) or distributed to other students.
+ * Group member Name: Vladyslav Huziienko, Maksym Volkovynskyi 
+ * Student IDs: 180749210, 126867225
+ * Date: 18 April 2024
+*****************************************************************************/
 import React from 'react'
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout/layout'
@@ -26,7 +36,7 @@ export default function CoursePage() {
             headers['Authorization'] = 'Bearer ' + jwtValue;
         }
 
-        fetch(`http://localhost:3001/course/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/course/${id}`, {
             headers: headers
         })
         .then(res => res.json())
@@ -47,7 +57,7 @@ export default function CoursePage() {
 
         const jwtValue = jwtCookie.split('=')[1];
 
-        fetch(`http://localhost:3001/add_to_wishlist`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/add_to_wishlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +78,7 @@ export default function CoursePage() {
 
         const jwtValue = jwtCookie.split('=')[1];
 
-        fetch(`http://localhost:3001/remove_from_wishlist`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/remove_from_wishlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +96,7 @@ export default function CoursePage() {
         <>
             <Layout />
             <div className='container m-auto p-4 mt-10 pt-2 flex mt-4'>
-                <div className='w-64 rounded-2xl shadow-lg mr-8 pb-3 h-full'>
+                <div className='w-64 min-w-64 rounded-2xl shadow-lg mr-8 pb-3 h-full'>
                     <img src='/CH1245.webp' className='rounded-t-2xl' />
                     <div className='p-2'>
                         <div className='text-lg' style={{fontWeight: 'medium'}}>{course?.course?.title}</div>

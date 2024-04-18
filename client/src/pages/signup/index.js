@@ -1,3 +1,13 @@
+/****************************************************************************** 
+ * BTI425 – Project
+ * 
+ * I declare that this assignment is my own work in accordance with SenecaAcademic Policy.
+ * No part of this assignment has been copied manually or electronically from any other source
+ * (including web sites) or distributed to other students.
+ * Group member Name: Vladyslav Huziienko, Maksym Volkovynskyi 
+ * Student IDs: 180749210, 126867225
+ * Date: 18 April 2024
+*****************************************************************************/
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { setCookie, unsetCookie } from "@/utils/cookies";
@@ -28,7 +38,7 @@ const Signup = () => {
             return;
         }
 
-        const response = await fetch("http://localhost:3001/create_user", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}:3001/create_user`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

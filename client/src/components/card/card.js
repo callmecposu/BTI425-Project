@@ -1,7 +1,17 @@
+/****************************************************************************** 
+ * BTI425 – Project
+ * 
+ * I declare that this assignment is my own work in accordance with SenecaAcademic Policy.
+ * No part of this assignment has been copied manually or electronically from any other source
+ * (including web sites) or distributed to other students.
+ * Group member Name: Vladyslav Huziienko, Maksym Volkovynskyi 
+ * Student IDs: 180749210, 126867225
+ * Date: 18 April 2024
+*****************************************************************************/
 import React, {useState, useAuthor} from 'react'
 import { useRouter } from 'next/router'
 
-export default function Card({course, wishlist=false, purchased=false}) {
+export default function Card({course, wishlist=false, purchased=false, dashboard=false}) {
     const router = useRouter()
 
     const removeFromWishlist = () => {
@@ -11,7 +21,7 @@ export default function Card({course, wishlist=false, purchased=false}) {
 
         const jwtValue = jwtCookie.split('=')[1];
 
-        fetch(`http://localhost:3001/remove_from_wishlist`, {
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/remove_from_wishlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,14 +52,14 @@ export default function Card({course, wishlist=false, purchased=false}) {
                             <div>{course?.lectures?.length} Lecture{course?.lectures?.length != 1 && 's'}</div>
                         </div>
                         <div className='text-lg h-14' style={{fontWeight: 'medium'}}>{course?.title}</div>
-                        <div className='text-md'>
+                        <div className='text-md h-12'>
                             {course?.description.length > 70 ? course?.description.substring(0, 70) + '...' : course?.description}    
                         </div>
                         <div 
                             className='w-full bg-emerald-700 text-white text-center py-2 mt-3 rounded-md cursor-pointer hover:bg-emerald-800 transition duration-300 ease-in-out'
                             onClick={() => router.push('/course/'+course?._id)}
                         >
-                            Explore
+                            {dashboard ? 'View Course Page' : 'Explore'}
                         </div>
                         {
                             wishlist && 
@@ -58,6 +68,15 @@ export default function Card({course, wishlist=false, purchased=false}) {
                                 onClick={() => {removeFromWishlist(); window.location.reload()}}
                             >
                                 Remove from Wishlist
+                            </div>
+                        }
+                        {
+                            dashboard && 
+                            <div 
+                                className='w-full border-2 border-emerald-700 text-emerald-700 text-center py-2 mt-3 rounded-md cursor-pointer hover:bg-zinc-100 transition duration-300 ease-in-out'
+                                onClick={() => {router.push('/edit_course/'+course?._id)}}
+                            >
+                                Edit Course
                             </div>
                         }
                     </>
