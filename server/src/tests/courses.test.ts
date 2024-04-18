@@ -83,10 +83,22 @@ describe('GET /course/:id', () => {
         expect(loginRes.statusCode).toBe(200)
         const res = await request(app).get('/course/660f680a49d6edc051f49279')
         .set('Authorization', `Bearer ${loginRes.body.token}`)
-        console.log(res.body)
         expect(res.statusCode).toBe(200)
         res.body.lectures.forEach((lec: any) => {
             expect(lec.content).toBeDefined()
         })
+    })
+})
+
+describe('GET /courses', () => {
+    it('should return all the courses if no \'q\' query parameter was provided', async () => {
+        const res = await request(app).get('/courses')
+        expect(res.status).toBe(200)
+        expect(res.body.length).toBeGreaterThanOrEqual(3)
+    })
+    it('should return specific courses if \'q\' query parameter was provided', async () => {
+        const res = await request(app).get('/courses?q=python')
+        expect(res.status).toBe(200)
+        expect(res.body.length).toBe(2)
     })
 })
